@@ -4,7 +4,10 @@ install:
 	bundle install
 
 lint:
-	rubocop
+	bundle exec rubocop
+
+lint-x:
+	bundle exec rubocop -A
 
 test:
 	rake test
