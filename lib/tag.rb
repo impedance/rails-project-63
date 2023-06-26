@@ -1,13 +1,4 @@
-# frozen_string_literal: true
-
-autoload Tag
-require_relative "hexlet_code/version"
-
-module HexletCode
-  class Error < StandardError; end
-
-  # Your code goes here...
-  class Tag
+  module Tag
     SINGLE_TAGS = %w[input img br].freeze
 
     def self.build(tag, attrs = {})
@@ -25,4 +16,3 @@ module HexletCode
       attrs.map { |key, value| "#{key}=\"#{value}\"" }
     end
   end
-end
