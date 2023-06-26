@@ -2,10 +2,6 @@
   module Tag
     SINGLE_TAGS = %w[input img br].freeze
 
-    def self.hello
-      puts "HELLLLLOO"
-    end
-
     def self.build(tag, attrs = {})
       store = []
       store << tag
