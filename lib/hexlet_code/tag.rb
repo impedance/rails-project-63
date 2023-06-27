@@ -18,8 +18,4 @@ module Tag
   def self.build_attrs(attrs)
     attrs.map { |key, value| "#{key}=\"#{value}\"" }
   end
-
-  def self.form_for(_attrs, url: "#")
-    build("form", action: url, method: "post")
-  end
 end
