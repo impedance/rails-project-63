@@ -3,6 +3,7 @@
 require "test_helper"
 
 class TestHexletCode < Minitest::Test
+  User = Struct.new(:name)
   def test_that_it_has_a_version_number
     refute_nil ::HexletCode::VERSION
   end
@@ -30,5 +31,21 @@ class TestHexletCode < Minitest::Test
 
     tag = Tag.build("a", href: "https://nsa.gov", value: "hello")
     assert_equal('<a href="https://nsa.gov" value="hello"></a>', tag)
+  end
+
+  def test_it_makes_form_tag
+    user = User.new(name: "Stark")
+
+    tag = Tag.form_for user do |f|
+    end
+    assert_equal('<form action="#" method="post"></form>', tag)
+  end
+
+  def test_it_makes_form_with_attribute
+    user = User.new(name: "Stark")
+
+    tag = Tag.form_for user, url: "/users" do |f|
+    end
+    assert_equal('<form action="/users" method="post"></form>', tag)
   end
 end
