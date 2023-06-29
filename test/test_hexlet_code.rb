@@ -53,8 +53,9 @@ class TestHexletCode < Minitest::Test
     user = User.new name: 'rob', job: 'hexlet', gender: 'm'    
     
     tag = HexletCode.form_for user do |f|
-      f.input :name
-      f.input :job, as: :text
+      # f.input :name
+      # f.input :job, as: :text
+      puts "Hello"
     end
 
     assert_equal('<form action="#" method="post">
