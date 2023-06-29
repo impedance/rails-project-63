@@ -9,10 +9,10 @@ module HexletCode
 
   def self.form_for(attrs, url: "#")
     Tag.build("form", action: url, method: "post") do
-      puts "!" * 10
-      puts yield(attrs)
-      yield if block_given? 
-      puts "!" * 10
+      if block_given? && !yield.nil?
+        Tag.build(yield)
+      end
+
     end
   end
 end
