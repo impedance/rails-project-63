@@ -51,10 +51,8 @@ class TestHexletCode < Minitest::Test
 
   def test_it_makes_form_using_object
     user = User.new name: "rob", job: "hexlet", gender: "m"
-
-    tag = HexletCode.form_for user do |f|
-      f.input
-      # f.input :job, as: :text
+    tag = HexletCode.form_for(user) do |f|
+      f.input :name
     end
 
     assert_equal('<form action="#" method="post">
