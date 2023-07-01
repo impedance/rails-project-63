@@ -12,24 +12,23 @@ module HexletCode
     yield(builder) if block_given?
 
     builder.render_html
-    # Tag.build("form", action: url, method: "post") do
-    #   if block_given? && !yield.nil?
-    #     # Tag.build(yield)
-    #     # yield()
-    #   end
-
-    # end
   end
 end
 
 # This module provides methods for building form
 class FormBuilder
-  def initialize(resource, **options)
-    puts resource
-    puts options
+  attr_accessor :url, :result
+
+  def initialize(_resource, **_options)
+    @url = "#"
+    @result = Tag.build("form", action: url, method: "post")
   end
 
   def input(param)
-    puts param
+    @result += Tag.build("input", name: "name")
+  end
+
+  def render_html
+    "#{result}</form>"
   end
 end

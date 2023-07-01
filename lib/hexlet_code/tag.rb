@@ -2,7 +2,7 @@
 
 # This module provides methods for building HTML
 module Tag
-  SINGLE_TAGS = %w[input img br].freeze
+  SINGLE_TAGS = %w[input img br form].freeze
 
   def self.build(tag, attrs = {})
     store = []
