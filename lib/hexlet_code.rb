@@ -17,15 +17,20 @@ end
 
 # This module provides methods for building form
 class FormBuilder
-  attr_accessor :url, :result
+  attr_accessor :url, :result, :resource
 
-  def initialize(_resource, **_options)
-    @url = "#"
+  def initialize(resource, **options)
+    @url = options[:url] || "#"
     @result = Tag.build("form", action: url, method: "post")
+    @resource = resource
   end
 
-  def input(param)
-    @result += Tag.build("input", name: "name")
+  def input(param, as: :input)
+    @result += if as == :input
+                 Tag.build("input", name: param, type: "text", value: resource[param])
+               else
+                 Tag.build("textarea", name: param, cols: 20, rows: 40) { resource[param] }
+               end
   end
 
   def render_html

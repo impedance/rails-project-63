@@ -41,23 +41,22 @@ class TestHexletCode < Minitest::Test
     assert_equal('<form action="#" method="post"></form>', tag)
   end
 
-  # def test_it_makes_form_with_attribute
-  #   user = User.new(name: "Stark")
-  #
-  #   tag = HexletCode.form_for user, url: "/users" do |f|
-  #   end
-  #   assert_equal('<form action="/users" method="post"></form>', tag)
-  # end
+  def test_it_makes_form_with_attribute
+    user = User.new(name: "Stark")
+
+    tag = HexletCode.form_for user, url: "/users" do |f|
+    end
+    assert_equal('<form action="/users" method="post"></form>', tag)
+  end
 
   def test_it_makes_form_using_object
     user = User.new name: "rob", job: "hexlet", gender: "m"
     tag = HexletCode.form_for(user) do |f|
       f.input :name
+      f.input :job, as: :text
     end
+    html_content = File.read("test/fixtures/using_object.html")
 
-    assert_equal('<form action="#" method="post">
-     <input name="name" type="text" value="rob">
-     <textarea name="job" cols="20" rows="40">hexlet</textarea>
-   </form>', tag)
+    assert_equal(html_content, tag)
   end
 end
