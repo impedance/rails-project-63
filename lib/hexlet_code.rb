@@ -25,11 +25,11 @@ class FormBuilder
     @resource = resource
   end
 
-  def input(param, as: :input)
-    @result += if as == :input
-                 Tag.build("input", name: param, type: "text", value: resource[param])
+  def input(field_name, **attributes)
+    @result += if attributes[:as] == :text
+                 Tag.build("textarea", name: field_name, cols: 20, rows: 40) { resource[field_name] }
                else
-                 Tag.build("textarea", name: param, cols: 20, rows: 40) { resource[param] }
+                 Tag.build("input", name: field_name, type: "text", value: resource[field_name], **attributes)
                end
   end
 

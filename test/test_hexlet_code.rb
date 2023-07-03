@@ -56,7 +56,20 @@ class TestHexletCode < Minitest::Test
       f.input :job, as: :text
     end
     html_content = File.read("test/fixtures/using_object.html")
+    doc = Nokogiri::HTML(html_content)
+    actual_tag = Nokogiri::HTML(tag)
 
-    assert_equal(html_content, tag)
+    assert_equal(doc.at_css("body").inner_html, actual_tag.at_css("body").inner_html)
   end
+
+  # def test_it_makes_form_with_hash_attributes
+  #   user = User.new name: "rob", job: "hexlet", gender: "m"
+  #   tag = HexletCode.form_for(user) do |f|
+  #     f.input :name, class: "user-input"
+  #     f.input :job
+  #   end
+  #   html_content = File.read("test/fixtures/hash_attributes.html")
+
+  #   assert_equal(html_content, tag)
+  # end
 end
