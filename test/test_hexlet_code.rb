@@ -54,6 +54,7 @@ class TestHexletCode < Minitest::Test
     actual_tag = HexletCode.form_for(user) do |f|
       f.input :name
       f.input :job, as: :text
+      f.submit "Wow"
     end
     expected_tag = File.read("test/fixtures/using_object.html")
 
@@ -76,6 +77,7 @@ class TestHexletCode < Minitest::Test
     tag = HexletCode.form_for(user) do |f|
       f.input :name, class: "user-input"
       f.input :job
+      f.submit
     end
     html_content = File.read("test/fixtures/hash_attributes.html")
 

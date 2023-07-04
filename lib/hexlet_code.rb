@@ -35,6 +35,10 @@ class FormBuilder
     end
   end
 
+  def submit(name = "Save")
+    @result += Tag.build("input", type: "submit", value: name)
+  end
+
   def build_input(name, attributes)
     @result += Tag.build("label", for: name) { name.capitalize }
     @result += Tag.build("input", name: name, type: "text", value: resource[name],
