@@ -28,14 +28,20 @@ class FormBuilder
   def input(field_name, **attributes)
     resource.public_send(field_name)
 
-    @result += if attributes[:as] == :text
-                 textarea(field_name, attributes)
-               else
-                 Tag.build("input", name: field_name, type: "text", value: resource[field_name], **attributes)
-               end
+    if attributes[:as] == :text
+      @result += build_textarea(field_name, attributes)
+    else
+      build_input(field_name, attributes)
+    end
   end
 
-  def textarea(name, attrs)
+  def build_input(name, attributes)
+    @result += Tag.build("label", for: name) { name.capitalize }
+    @result += Tag.build("input", name: name, type: "text", value: resource[name],
+                                  **attributes)
+  end
+
+  def build_textarea(name, attrs)
     cols = attrs[:cols] || 20
     rows = attrs[:rows] || 40
     Tag.build("textarea", name: name, cols: cols, rows: rows) { resource[name] }
