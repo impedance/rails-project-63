@@ -27,7 +27,9 @@ class FormBuilder
 
   def input(field_name, **attributes)
     @result += if attributes[:as] == :text
-                 Tag.build("textarea", name: field_name, cols: 20, rows: 40) { resource[field_name] }
+                 cols = attributes[:cols] || 20
+                 rows = attributes[:rows] || 40
+                 Tag.build("textarea", name: field_name, cols: cols, rows: rows) { resource[field_name] }
                else
                  Tag.build("input", name: field_name, type: "text", value: resource[field_name], **attributes)
                end

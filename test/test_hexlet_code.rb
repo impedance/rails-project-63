@@ -60,14 +60,25 @@ class TestHexletCode < Minitest::Test
     assert_equal(expected_tag, actual_tag)
   end
 
-  # def test_it_makes_form_with_hash_attributes
-  #   user = User.new name: "rob", job: "hexlet", gender: "m"
-  #   tag = HexletCode.form_for(user) do |f|
-  #     f.input :name, class: "user-input"
-  #     f.input :job
-  #   end
-  #   html_content = File.read("test/fixtures/hash_attributes.html")
+  def test_it_makes_form_with_hash_attributes
+    user = User.new name: "rob", job: "hexlet", gender: "m"
+    tag = HexletCode.form_for(user) do |f|
+      f.input :name, class: "user-input"
+      f.input :job
+    end
+    html_content = File.read("test/fixtures/hash_attributes.html")
 
-  #   assert_equal(html_content, tag)
-  # end
+    assert_equal(html_content, tag)
+  end
+
+  def test_it_makes_form_with_non_default_values
+    user = User.new name: "rob", job: "hexlet", gender: "m"
+    actual_tag = HexletCode.form_for user, url: "#" do |f|
+      f.input :job, as: :text, rows: 50, cols: 50
+    end
+
+    expected_tag = File.read("test/fixtures/non_default_values.html")
+
+    assert_equal(expected_tag, actual_tag)
+  end
 end
