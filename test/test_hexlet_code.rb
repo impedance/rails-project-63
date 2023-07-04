@@ -60,6 +60,17 @@ class TestHexletCode < Minitest::Test
     assert_equal(expected_tag, actual_tag)
   end
 
+  def test_it_raises_error_when_no_attribute_found
+    user = User.new name: "rob", job: "hexlet", gender: "m"
+    assert_raises NoMethodError do
+      HexletCode.form_for(user) do |f|
+        f.input :name
+        f.input :job, as: :text
+        f.input :age
+      end
+    end
+  end
+
   def test_it_makes_form_with_hash_attributes
     user = User.new name: "rob", job: "hexlet", gender: "m"
     tag = HexletCode.form_for(user) do |f|

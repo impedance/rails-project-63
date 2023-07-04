@@ -26,13 +26,19 @@ class FormBuilder
   end
 
   def input(field_name, **attributes)
+    resource.public_send(field_name)
+
     @result += if attributes[:as] == :text
-                 cols = attributes[:cols] || 20
-                 rows = attributes[:rows] || 40
-                 Tag.build("textarea", name: field_name, cols: cols, rows: rows) { resource[field_name] }
+                 textarea(field_name, attributes)
                else
                  Tag.build("input", name: field_name, type: "text", value: resource[field_name], **attributes)
                end
+  end
+
+  def textarea(name, attrs)
+    cols = attrs[:cols] || 20
+    rows = attrs[:rows] || 40
+    Tag.build("textarea", name: name, cols: cols, rows: rows) { resource[name] }
   end
 
   def render_html
