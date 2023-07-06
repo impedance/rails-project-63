@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 autoload :Tag, "hexlet_code/tag"
-require_relative "hexlet_code/version"
+autoload :VERSION, "hexlet_code/version"
+autoload :FormRender, "hexlet_code/form_render"
 
 # This module provides methods for building HTML
 module HexletCode
@@ -11,7 +12,8 @@ module HexletCode
     builder = FormBuilder.new(resource, **options)
     yield(builder) if block_given?
 
-    builder.render_html
+    builded_form = builder.close_form
+    FormRender.render_html(builded_form)
   end
 end
 
@@ -21,7 +23,7 @@ class FormBuilder
 
   def initialize(resource, **options)
     @url = options[:url] || "#"
-    @result = Tag.build("form", action: url, method: "post")
+    @result = [Tag.build("form", action: url, method: "post")]
     @resource = resource
   end
 
@@ -29,19 +31,19 @@ class FormBuilder
     resource.public_send(field_name)
 
     if attributes[:as] == :text
-      @result += build_textarea(field_name, attributes)
+      @result << build_textarea(field_name, attributes)
     else
       build_input(field_name, attributes)
     end
   end
 
   def submit(name = "Save")
-    @result += Tag.build("input", type: "submit", value: name)
+    @result << Tag.build("input", type: "submit", value: name)
   end
 
   def build_input(name, attributes)
-    @result += Tag.build("label", for: name) { name.capitalize }
-    @result += Tag.build("input", name: name, type: "text", value: resource[name],
+    @result << Tag.build("label", for: name) { name.capitalize }
+    @result << Tag.build("input", name: name, type: "text", value: resource[name],
                                   **attributes)
   end
 
@@ -51,7 +53,7 @@ class FormBuilder
     Tag.build("textarea", name: name, cols: cols, rows: rows) { resource[name] }
   end
 
-  def render_html
-    "#{result}</form>"
+  def close_form
+    @result << "</form>"
   end
 end
