@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# module HexletCode
 # This module provides methods for building HTML
 module Tag
   SINGLE_TAGS = %w[input img br form].freeze
@@ -19,3 +20,4 @@ module Tag
     attrs.map { |key, value| "#{key}=\"#{value}\"" }
   end
 end
+# end
