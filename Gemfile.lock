@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    genform (0.1.0)
+    hexlet_code (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -37,7 +37,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  genform!
+  hexlet_code!
   minitest (~> 5.0)
   rake (~> 13.0)
   rubocop (~> 1.21)
