@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "hexlet_code/version"
 autoload :Tag, "hexlet_code/tag"
-autoload :VERSION, "hexlet_code/version"
 autoload :FormRender, "hexlet_code/form_render"
 autoload :FormBuilder, "hexlet_code/form_builder"
 
