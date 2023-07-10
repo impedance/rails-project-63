@@ -4,7 +4,7 @@ autoload :Textarea, "hexlet_code/textarea"
 autoload :Input, "hexlet_code/input"
 # This module provides methods for building HTML
 class FormBuilder
-  attr_accessor :url, :result, :resource
+  attr_accessor :url, :result, :resource, :method
 
   def initialize(resource, **options)
     @url = options[:url] || "#"
