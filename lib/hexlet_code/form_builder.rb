@@ -8,7 +8,8 @@ class FormBuilder
 
   def initialize(resource, **options)
     @url = options[:url] || "#"
-    @result = [Tag.build("form", action: url, method: "post")]
+    @method = options[:method] || "post"
+    @result = [Tag.build("form", action: url, method: method)]
     @resource = resource
   end
 
