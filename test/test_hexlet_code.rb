@@ -101,11 +101,6 @@ class TestHexletCode < Minitest::Test
     actual = HexletCode.form_for user, url: "/profile", method: :get, class: "hexlet-form", &:submit
 
     expected_tag = File.read("test/fixtures/form_with_options.html")
-    # expected_tag =
-    #   with_tag 'form', with: { action: '/profile', method: 'get', class: 'hexlet-form' }
-    #   with_tag 'input', with: { type: 'submit', value: 'Save' }
-    # end
-
     assert_equal(expected_tag, actual)
   end
 end
