@@ -98,9 +98,7 @@ class TestHexletCode < Minitest::Test
   def test_it_makes_form_with_options
     user = User.new name: "rob"
 
-    actual = HexletCode.form_for user, url: "/profile", method: :get, class: "hexlet-form" do |f|
-      f.submit
-    end
+    actual = HexletCode.form_for user, url: "/profile", method: :get, class: "hexlet-form", &:submit
 
     expected_tag = File.read("test/fixtures/form_with_options.html")
     # expected_tag =
