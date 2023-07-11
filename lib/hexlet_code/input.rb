@@ -13,7 +13,7 @@ class Input < BaseInput
 
   def build
     result = [Tag.build('label', for: name) { name.capitalize }]
-    result << Tag.build('input', name: name, type: 'text', value: resource[name], **attrs)
+    result << Tag.build('input', name:, type: 'text', value: resource[name], **attrs)
     result.join
   end
 end

@@ -14,7 +14,7 @@ class Textarea < BaseInput
 
   def build
     result = [Tag.build('label', for: name) { name.capitalize }]
-    result << Tag.build('textarea', name: name, cols: cols, rows: rows) { resource[name] }
+    result << Tag.build('textarea', name:, cols:, rows:) { resource[name] }
     result.join
   end
 end

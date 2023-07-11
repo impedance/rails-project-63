@@ -9,7 +9,7 @@ module Tag
     store = []
     store << tag
     store << build_attrs(attrs) if attrs.any?
-    prepared_tags = "<#{store.join(attrs.any? ? " " : "")}>"
+    prepared_tags = "<#{store.join(attrs.any? ? ' ' : '')}>"
 
     return prepared_tags if SINGLE_TAGS.include?(tag)
 
