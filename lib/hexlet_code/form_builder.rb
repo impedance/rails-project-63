@@ -10,9 +10,8 @@ class FormBuilder
     @url = options[:url] || "#"
     @method = options[:method] || "post"
     options.delete(:url)
-    options.delete(:method)
-    # CHANGE order of merging
-    form_attrs = options.merge({ action: url, method: method })
+    url_attrs = { action: url, method: method }
+    form_attrs = url_attrs.merge(options)
     @result = [Tag.build("form", form_attrs)]
     @resource = resource
   end
