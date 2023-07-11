@@ -36,16 +36,14 @@ class TestHexletCode < Minitest::Test
   def test_it_makes_form_tag
     user = User.new(name: 'Stark')
 
-    tag = HexletCode.form_for user do |f|
-    end
+    tag = HexletCode.form_for user
     assert_equal('<form action="#" method="post"></form>', tag)
   end
 
   def test_it_makes_form_with_attribute
     user = User.new(name: 'Stark')
 
-    tag = HexletCode.form_for user, url: '/users' do |f|
-    end
+    tag = HexletCode.form_for user, url: '/users'
     assert_equal('<form action="/users" method="post"></form>', tag)
   end
 
