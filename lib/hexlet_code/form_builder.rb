@@ -9,7 +9,11 @@ class FormBuilder
   def initialize(resource, **options)
     @url = options[:url] || "#"
     @method = options[:method] || "post"
-    @result = [Tag.build("form", action: url, method: method)]
+    options.delete(:url)
+    options.delete(:method)
+    # CHANGE order of merging
+    form_attrs = options.merge({ action: url, method: method })
+    @result = [Tag.build("form", form_attrs)]
     @resource = resource
   end
 

@@ -50,10 +50,10 @@ class TestHexletCode < Minitest::Test
   end
 
   def test_it_makes_form_using_object
-    user = User.new name: "rob", job: "hexlet", gender: "m"
-    actual_tag = HexletCode.form_for(user) do |f|
+    user = User.new job: "hexlet", gender: "m"
+    actual_tag = HexletCode.form_for(user, url: "#", method: :get) do |f|
       f.input :name
-      f.input :job, as: :text
+      f.input :job, as: :text, rows: 50, cols: 50
       f.submit "Wow"
     end
     expected_tag = File.read("test/fixtures/using_object.html")
@@ -93,5 +93,21 @@ class TestHexletCode < Minitest::Test
     expected_tag = File.read("test/fixtures/non_default_values.html")
 
     assert_equal(expected_tag, actual_tag)
+  end
+
+  def test_it_makes_form_with_options
+    user = User.new name: "rob"
+
+    actual = HexletCode.form_for user, url: "/profile", method: :get, class: "hexlet-form" do |f|
+      f.submit
+    end
+
+    expected_tag = File.read("test/fixtures/form_with_options.html")
+    # expected_tag =
+    #   with_tag 'form', with: { action: '/profile', method: 'get', class: 'hexlet-form' }
+    #   with_tag 'input', with: { type: 'submit', value: 'Save' }
+    # end
+
+    assert_equal(expected_tag, actual)
   end
 end
