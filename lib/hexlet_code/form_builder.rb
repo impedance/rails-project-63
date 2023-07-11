@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-autoload :Textarea, "hexlet_code/textarea"
-autoload :Input, "hexlet_code/input"
+autoload :Textarea, 'hexlet_code/textarea'
+autoload :Input, 'hexlet_code/input'
 # This module provides methods for building HTML
 class FormBuilder
   attr_accessor :url, :result, :resource, :method
 
   def initialize(resource, **options)
-    @url = options[:url] || "#"
-    @method = options[:method] || "post"
+    @url = options[:url] || '#'
+    @method = options[:method] || 'post'
     options.delete(:url)
     url_attrs = { action: url, method: method }
     form_attrs = url_attrs.merge(options)
-    @result = [Tag.build("form", form_attrs)]
+    @result = [Tag.build('form', form_attrs)]
     @resource = resource
   end
 
@@ -28,11 +28,11 @@ class FormBuilder
     end
   end
 
-  def submit(name = "Save")
-    @result << Tag.build("input", type: "submit", value: name)
+  def submit(name = 'Save')
+    @result << Tag.build('input', type: 'submit', value: name)
   end
 
   def close_form
-    @result << "</form>"
+    @result << '</form>'
   end
 end

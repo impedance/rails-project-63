@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "hexlet_code/version"
-autoload :Tag, "hexlet_code/tag"
-autoload :FormRender, "hexlet_code/form_render"
-autoload :FormBuilder, "hexlet_code/form_builder"
+require_relative 'hexlet_code/version'
+autoload :Tag, 'hexlet_code/tag'
+autoload :FormRender, 'hexlet_code/form_render'
+autoload :FormBuilder, 'hexlet_code/form_builder'
 
 # This module provides methods for building HTML
 module HexletCode
