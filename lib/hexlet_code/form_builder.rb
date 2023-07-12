@@ -1,38 +1,32 @@
 # frozen_string_literal: true
 
-autoload :Textarea, 'hexlet_code/textarea'
-autoload :Input, 'hexlet_code/input'
+autoload :TextInput, 'hexlet_code/text_input'
+autoload :StringInput, 'hexlet_code/string_input'
 # This module provides methods for building HTML
 class FormBuilder
-  attr_accessor :url, :result, :resource, :method
+  attr_accessor :resource, :form_body
 
   def initialize(resource, **options)
-    @url = options[:url] || '#'
-    @method = options[:method] || 'post'
-    options.delete(:url)
-    url_attrs = { action: url, method: }
-    form_attrs = url_attrs.merge(options)
-    @result = [Tag.build('form', form_attrs)]
     @resource = resource
+    action = options.fetch(:url, '#')
+    @form_body = {
+      inputs: [],
+      submit: nil,
+      form_options: { action:, method: 'post' }.merge(options.except(:url))
+    }
   end
 
   def input(field_name, **attributes)
     resource.public_send(field_name)
 
-    if attributes[:as] == :text
-      textarea = Textarea.new(resource, field_name, attributes)
-      @result << textarea.build
-    else
-      input = Input.new(resource, field_name, attributes)
-      @result << input.build
-    end
+    @form_body[:inputs] << if attributes[:as] == :text
+                             TextInput.new(resource, field_name, attributes)
+                           else
+                             StringInput.new(resource, field_name, attributes)
+                           end
   end
 
-  def submit(name = 'Save')
-    @result << Tag.build('input', type: 'submit', value: name)
-  end
-
-  def close_form
-    @result << '</form>'
+  def submit(value = 'Save')
+    @form_body[:submit] = { value: }
   end
 end

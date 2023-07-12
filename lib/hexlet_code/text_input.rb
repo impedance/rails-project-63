@@ -3,7 +3,7 @@
 autoload :BaseInput, 'hexlet_code/base_input'
 
 # Class for input tag
-class Textarea < BaseInput
+class TextInput < BaseInput
   attr_reader :cols, :rows
 
   def initialize(resource, name, attrs)

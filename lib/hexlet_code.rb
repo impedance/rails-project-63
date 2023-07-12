@@ -10,10 +10,9 @@ module HexletCode
   class Error < StandardError; end
 
   def self.form_for(resource, **options)
-    builder = FormBuilder.new(resource, **options)
-    yield(builder) if block_given?
+    builded_form = FormBuilder.new(resource, **options)
+    yield(builded_form) if block_given?
 
-    builded_form = builder.close_form
-    FormRender.render_html(builded_form)
+    FormRender.render_html(builded_form.form_body)
   end
 end
