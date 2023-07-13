@@ -13,22 +13,20 @@ module FormRender
   end
 
   def self.build_inputs(inputs)
-    inputs.each do |input|
-      @result << Tag.build('label', for: input.name) { input.name.capitalize }
-      @result << Tag.build('input', name: input.name, type: 'text', value: input.resource[input.name], **input.attrs)
+    inputs.map do |input|
+      [Tag.build('label', for: input.name) { input.name.capitalize },
+       prepare_tags(input, input.resource, input.name)].join
     end
   end
 
-  def build
-    result = [Tag.build('label', for: name) { name.capitalize }]
-    result << Tag.build('textarea', name:, cols:, rows:) { resource[name] }
-    result.join
+  def self.prepare_tags(tag, resource, name)
+    if tag.instance_of?(TextInput)
+      Tag.build('textarea', name:, cols: tag.cols, rows: tag.rows) do
+        resource[name]
+      end
+    else
+      Tag.build('input', name:, type: 'text', value: resource[name], **tag.attrs)
+    end
   end
-
-  # def build
-  #   result = [Tag.build('label', for: name) { name.capitalize }]
-  #   result << Tag.build('input', name:, type: 'text', value: resource[name], **attrs)
-  #   result.join
-  # end
 end
 # end

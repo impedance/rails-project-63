@@ -11,10 +11,4 @@ class TextInput < BaseInput
     @cols = attrs[:cols] || 20
     @rows = attrs[:rows] || 40
   end
-
-  def build
-    result = [Tag.build('label', for: name) { name.capitalize }]
-    result << Tag.build('textarea', name:, cols:, rows:) { resource[name] }
-    result.join
-  end
 end

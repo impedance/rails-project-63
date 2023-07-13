@@ -10,10 +10,4 @@ class StringInput < BaseInput
     super(resource, name)
     @attrs = attrs
   end
-
-  def build
-    result = [Tag.build('label', for: name) { name.capitalize }]
-    result << Tag.build('input', name:, type: 'text', value: resource[name], **attrs)
-    result.join
-  end
 end
