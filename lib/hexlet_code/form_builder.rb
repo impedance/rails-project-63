@@ -19,11 +19,13 @@ class FormBuilder
   def input(field_name, **attributes)
     resource.public_send(field_name)
 
-    @form_body[:inputs] << if attributes[:as] == :text
-                             TextInput.new(resource, field_name, attributes)
-                           else
-                             StringInput.new(resource, field_name, attributes)
-                           end
+    input_class = get_input_class(attributes[:as])
+    @form_body[:inputs] << input_class.new(resource, field_name, attributes)
+  end
+
+  def get_input_class(as)
+    as ||= :string
+    "#{as.capitalize}Input".constantize
   end
 
   def submit(value = 'Save')
