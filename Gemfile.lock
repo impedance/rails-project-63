@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     hexlet_code (0.1.0)
+      activesupport
 
 GEM
   remote: https://rubygems.org/
@@ -49,7 +50,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activesupport
   hexlet_code!
   minitest (~> 5.0)
   rake (~> 13.0)
