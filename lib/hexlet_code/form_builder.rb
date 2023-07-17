@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'string_input'
-require_relative 'text_input'
+require_relative 'inputs/string_input'
+require_relative 'inputs/text_input'
 # This module provides methods for building HTML
 module HexletCode
   class FormBuilder
@@ -26,7 +26,7 @@ module HexletCode
 
     def get_input_class(as)
       as ||= :string
-      "HexletCode::#{as.capitalize}Input".constantize
+      "HexletCode::Inputs::#{as.capitalize}Input".constantize
     end
 
     def submit(value = 'Save')
