@@ -4,10 +4,9 @@ require_relative 'inputs/string_input'
 require_relative 'inputs/text_input'
 # This module provides methods for building HTML
 module HexletCode
+  autoload :TextInput, 'hexlet_code/inputs/text_input'
+  autoload :StringInput, 'hexlet_code/inputs/string_input'
   class FormBuilder
-    autoload :TextInput, 'hexlet_code/inputs/text_input'
-    autoload :StringInput, 'hexlet_code/inputs/string_input'
-
     attr_accessor :resource, :form_body
 
     def initialize(resource, **options)
