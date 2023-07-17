@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 # Class for input tag
 module HexletCode
   module Inputs

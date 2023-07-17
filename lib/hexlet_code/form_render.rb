@@ -2,9 +2,8 @@
 
 # Rendering form module
 module HexletCode
+  autoload :Tag, 'hexlet_code/tag'
   module FormRender
-    autoload :Tag, 'hexlet_code/tag'
-
     def self.render_html(form)
       @result = [Tag.build('form', form[:form_options])]
       @result << build_inputs(form[:inputs]) if form[:inputs].any?
