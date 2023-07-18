@@ -2,7 +2,6 @@
 
 # Rendering form module
 module HexletCode
-  autoload :Tag, 'hexlet_code/tag'
   module FormRender
     def self.render_html(form)
       @result = [Tag.build('form', form[:form_options])]
@@ -20,7 +19,7 @@ module HexletCode
     end
 
     def self.prepare_tags(tag, resource, name)
-      if tag.instance_of?(HexletCode::Inputs::TextInput)
+      if tag.instance_of?(HexletCode::TextInput)
         Tag.build('textarea', name:, cols: tag.cols, rows: tag.rows) do
           resource[name]
         end

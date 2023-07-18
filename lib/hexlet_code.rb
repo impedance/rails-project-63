@@ -7,6 +7,10 @@ require 'active_support/all'
 module HexletCode
   autoload :FormRender, 'hexlet_code/form_render'
   autoload :FormBuilder, 'hexlet_code/form_builder'
+  autoload :Tag, 'hexlet_code/tag'
+  autoload :TextInput, 'hexlet_code/inputs/text_input'
+  autoload :StringInput, 'hexlet_code/inputs/string_input'
+  autoload :BaseInput, 'hexlet_code/inputs/base_input'
 
   class Error < StandardError; end
 
