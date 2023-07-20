@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'hexlet_code/version'
 require 'active_support/all'
 
 # This module provides methods for building HTML
 module HexletCode
+  autoload :Version, 'hexlet_code/version'
   autoload :FormRender, 'hexlet_code/form_render'
   autoload :FormBuilder, 'hexlet_code/form_builder'
   autoload :Tag, 'hexlet_code/tag'
