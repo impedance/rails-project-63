@@ -9,5 +9,12 @@ module HexletCode
       super(resource, name)
       @attrs = attrs
     end
+
+    def render
+      [
+        make_label,
+        Tag.build('input', name:, type: 'text', value: resource[name], **attrs)
+      ]
+    end
   end
 end

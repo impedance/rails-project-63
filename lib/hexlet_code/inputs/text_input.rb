@@ -10,5 +10,14 @@ module HexletCode
       @cols = attrs[:cols] || 20
       @rows = attrs[:rows] || 40
     end
+
+    def render
+      [
+        make_label,
+        Tag.build('textarea', name:, cols:, rows:) do
+          resource[name]
+        end
+      ]
+    end
   end
 end

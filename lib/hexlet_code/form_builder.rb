@@ -10,7 +10,7 @@ module HexletCode
       action = options.fetch(:url, '#')
       @form_body = {
         inputs: [],
-        submit: nil,
+        submit: { options: nil },
         form_options: { action:, method: 'post' }.merge(options.except(:url))
       }
     end
@@ -18,17 +18,12 @@ module HexletCode
     def input(field_name, **attributes)
       resource.public_send(field_name)
 
-      input_class = get_input_class(attributes[:as])
-      @form_body[:inputs] << input_class.new(resource, field_name, attributes)
-    end
-
-    def get_input_class(as)
-      as ||= :string
-      "HexletCode::#{as.capitalize}Input".constantize
+      input_attrs = { type: attributes[:as] || :string, resource:, field_name:, attributes: }
+      @form_body[:inputs] << input_attrs
     end
 
     def submit(value = 'Save')
-      @form_body[:submit] = { value: }
+      @form_body[:submit][:options] = { type: 'submit', value: }
     end
   end
 end

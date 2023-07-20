@@ -9,5 +9,9 @@ module HexletCode
       @resource = resource
       @name = name
     end
+
+    def make_label
+      Tag.build('label', for: name) { name.capitalize }
+    end
   end
 end

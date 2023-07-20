@@ -3,21 +3,21 @@
 # This module provides methods for building HTML
 module HexletCode
   module Tag
-    SINGLE_TAGS = %w[input img br form].freeze
+    SINGLE_TAGS = %w[input img br].freeze
 
     def self.build(tag, attrs = {})
-      store = []
-      store << tag
-      store << build_attrs(attrs) if attrs.any?
-      prepared_tags = "<#{store.join(attrs.any? ? ' ' : '')}>"
+      store = build_attrs(attrs)
+      return "<#{tag}#{store}>" if SINGLE_TAGS.include?(tag)
 
-      return prepared_tags if SINGLE_TAGS.include?(tag)
-
-      "#{prepared_tags}#{yield if block_given?}</#{tag}>"
+      body = yield
+      "<#{tag}#{store}>#{body}</#{tag}>"
     end
 
     def self.build_attrs(attrs)
-      attrs.map { |key, value| "#{key}=\"#{value}\"" }
+      return '' if attrs.empty?
+
+      build_attrs = attrs.map { |key, value| "#{key}=\"#{value}\"" }.join(' ')
+      [' ', build_attrs].join
     end
   end
 end

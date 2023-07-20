@@ -4,28 +4,20 @@
 module HexletCode
   module FormRender
     def self.render_html(form)
-      @result = [Tag.build('form', form[:form_options])]
-      @result << build_inputs(form[:inputs]) if form[:inputs].any?
-      @result << Tag.build('input', type: 'submit', value: form[:submit][:value]) if form[:submit]
-      @result << '</form>'
-      @result.join
-    end
+      result = form[:inputs].map { |input| build_input(input) }
 
-    def self.build_inputs(inputs)
-      inputs.map do |input|
-        [Tag.build('label', for: input.name) { input.name.capitalize },
-         prepare_tags(input, input.resource, input.name)].join
+      submit_options = form[:submit][:options]
+      submit_tag = submit_options ? HexletCode::Tag.build('input', submit_options) : ''
+      HexletCode::Tag.build('form', form[:form_options]) do
+        result.join + submit_tag
       end
     end
 
-    def self.prepare_tags(tag, resource, name)
-      if tag.instance_of?(HexletCode::TextInput)
-        Tag.build('textarea', name:, cols: tag.cols, rows: tag.rows) do
-          resource[name]
-        end
-      else
-        Tag.build('input', name:, type: 'text', value: resource[name], **tag.attrs)
-      end
+    def self.build_input(input)
+      klass_name = "HexletCode::#{input[:type].capitalize}Input"
+      klass = klass_name.constantize
+      input = klass.new(input[:resource], input[:field_name], input[:attributes])
+      input.render
     end
   end
 end
