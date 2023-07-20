@@ -12,14 +12,18 @@ class TestHexletCode < Minitest::Test
     user = User.new(name: 'Stark')
 
     tag = HexletCode.form_for user
-    assert_equal('<form action="#" method="post"></form>', tag)
+    expected_tag = File.read('test/fixtures/form_tag.html')
+
+    assert_equal(expected_tag, tag)
   end
 
   def test_it_makes_form_with_attribute
     user = User.new(name: 'Stark')
 
     tag = HexletCode.form_for user, url: '/users'
-    assert_equal('<form action="/users" method="post"></form>', tag)
+    expected_tag = File.read('test/fixtures/form_attribute.html')
+
+    assert_equal(expected_tag, tag)
   end
 
   def test_it_makes_form_using_object
