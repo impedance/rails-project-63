@@ -11,7 +11,7 @@ Setup gem by adding it to Gemfile using following command
     $ bundle add hexlet_code --git 'https://github.com/impedance/rails-project-63.git'
 
 ## How to use
-```
+```ruby
 
 require 'hexlet_code'
 
